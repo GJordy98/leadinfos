@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} accueil {% endblock %}
+
+{% block content %}
+<h1>Bienvenue {{ user.username }} </h1>
+
+<div id="carouselExampleRide" class="carousel slide mb-3" data-bs-ride="true">
+    <div class="carousel-inner" style="height: 500px;">
+      <div class="carousel-item active">
+        <img style="height: 500px;" src="{% static 'images/architecture.jpg' %}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img style="height: 500px;"src="{% static 'images/planets.jpg' %}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img style="height: 500px;" src="{% static 'images/sunset.jpg' %}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="row">
+
+    <div class="col-lg-8 mx-2">
+        <div class="row">
+
+        
+            {% for post in posts %}
+                <div class="col-md-6">
+
+                    <a href="{% url 'details' post.slug %}">
+                        <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.titre }}">
+                    </a>
+                    <div class="card-body">
+                        <h2 class="card-title">{{ post.titre }}</h2>
+                        <a class="btn btn-info" href="{% url 'details' post.slug %}">En savoir plus</a>
+                    </div>
+                </div>
+        
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-lg-3 ">
+        <div class="card">
+            <div class="card-title">
+                <h3 class="text-center">Catégories</h3>
+            </div>
+            <hr>
+            <div class="card-body">
+                <div class="row">
+                    {% for Category in Categories %}
+                    <div class="col-sm-6">
+                        <ul>
+                            <li style="list-style-type: none;">
+                                <a href="{% url 'category_home' Category.slug %}">{{ Category.name }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+
+  </div>
+
+  <nav aria-label="Pagination" class="mt-3">
+    <ul class="pagination justify-content-center">
+      {% if posts.has_previous %}
+          <li class="page-item">
+            <a href="?page={{ posts.previous_page_number }}" class="page-link">Précédent</a>
+          </li>
+          {% endif %}
+
+        
+          <li class="page-item">
+            <a class="page-link" href="#!">{{ posts.number }}</a>
+          </li>
+          
+          <li class="page-item">
+            <a class="page-link" href="#!">de</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#!">{{ posts.paginator.num_pages }}</a>
+          </li>
+        
+
+        {% if posts.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ posts.next_page_number }}">Suivant</a>
+          </li>
+          {% endif %}
+
+    </ul>
+  </nav>
+
+  <h2>A la une:</h2>
+
+  <div class="container justify-content-center my-3">
+    
+      <div class="row">
+
+    
+          {% for post in pposts2 %}
+
+          <div class="card text-white col-sm-4 border-0">
+            <a href="{% url 'details' post.slug %}"><img class="img-fluid" src="{{ post.image.url }}" alt="{{ post.titre }}"></a>
+            <div class="card-img-overlay">
+              <h5 class="card-title">{{ post.titre }}</h5>
+              <a href="{% url 'details' post.slug %}" class="btn btn-primary">En savoir plus</a>
+            </div>
+          </div>
+          
+          {% endfor %}
+
+      </div>
+
+  </div>
+
+{% endblock %}
+

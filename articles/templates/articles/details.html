@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} {{ post.titre }} {% endblock %}
+
+{% block content %}
+<h1 class="text-center">{{ post.titre }} </h1>
+<img class="justify-content-center" src="{{ post.image.url }}" alt="{{ post.titre }}">
+<p>{{ post.contenu }}</p>
+<p>Créé par : {{ post.auteur }} </p>
+<p>Le : <span> {{ post.created }} </span> </p>
+    
+{% endblock %}

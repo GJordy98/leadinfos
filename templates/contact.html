@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} contact {% endblock %}
+
+{% block content %}
+<h1>Contactez nous</h1>
+    
+    <div class="container contact" >
+        <div class="form">
+            <form style="background-color: aliceblue;
+            border: solid 1px darkblue;
+            padding: 7px;
+            justify-content: center; max-width: 700px; margin:auto;
+            justify-content: space-between; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5);" action="{% url 'contact' %}" method="POST">
+                {% csrf_token %}
+                {{ form}}
+                <button type="submit" class="btn btn-info mt-2 d-flex mx-auto" data-bs-toggle="modal"
+                 data-bs-target="#modal1">Envoyer</button>
+
+                <div class="modal fade" id="modal1" >
+                    <div class="modal-dialog">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Merci pour votre message</h5>
+                                <button class="btn-close" data-dismiss aria-label="close">
+                                </button>
+                            </div>
+                            <div class="modal-body" aria-describedby="content">
+                                <p>Nous vous remercions pour votre message et vous promettons une reponse rapide à votre préoccupation</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div>
+
+    </div>
+{% endblock %}

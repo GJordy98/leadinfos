@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Création d'articles {% endblock %}
+
+{% block content %}
+
+    <div class="container">
+                    <div class="form">
+                <form action="{% url 'create' %}" method="POST">
+                    {% csrf_token %}
+                    <h1>Créer un article</h1>
+                    <hr>
+                    {{ form }}
+                    <button type="submit" class="btn btn-info">Créer un article</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

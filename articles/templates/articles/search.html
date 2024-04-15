@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Résultats_recherche {% endblock %}
+
+{% block content %}
+<h1 class="text-center">  {{ message }} :  </h1>
+<div class="row">
+    {% for post in posts %}
+    <div class="col-lg-4 col-md-6">
+
+        <a href="{% url 'details' post.slug %}">
+            <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.titre }}">
+        </a>
+        <div class="card-body">
+            <h2 class="card-title">{{ post.titre }}</h2>
+            <a class="btn btn-info" href="{% url 'details' post.slug %}">En savoir plus</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+    
+{% endblock %}
